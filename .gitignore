@@ -12,3 +12,7 @@
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
 
+#boot folder
+/boot/*.bin
+/boot/boot
+
