@@ -10,7 +10,5 @@
 void tadpole_init(void);
 
 void tadpole_init(void) {
-    __asm__("mov %ax, 0x0003"
-            "int 10h");
     
 }
