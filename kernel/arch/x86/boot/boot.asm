@@ -19,21 +19,18 @@ _main:
     mov     dl, 0
     int     10h
     jmp     DEBUG_LOAD_SE_SECTOR
-    ;; next, we will load the kernel to 0x10000
+    ;; next, we will load the kernel to 0x1000
     LOADER_MSG db "Frog Loader Ver 0.1"
 DEBUG_LOAD_SE_SECTOR:
     mov     ax, 0
     mov     es, ax
     mov     bx, 0x1000          ;will load to 0x1000
-    mov     ah, 02
-    mov     al, 01
-    mov     ch, 00
-    mov     cl, 02              ;read sector 02
-    mov     dh, 00
+    mov     ah, 02h
+    mov     al, 01h
+    mov     ch, 00h
+    mov     cl, 02h             ;read sector 02
+    mov     dh, 00h
     int     13h
-    ;; check error
-    or      ah, ah
-    jnz     LOAD_ERROR
     ;; will go to 32bit
 GO_P_MODE:
     ;; we will switch to protect mode here
@@ -54,7 +51,7 @@ gdt_table_start:
 gdt_null:
 	dd 0h
 	dd 0h
-	gdt_data_addr equ $-gdt_table_start
+gdt_data_addr equ $-gdt_table_start
 gdt_data:
 	dw 07ffh
 	dw 0h
@@ -62,7 +59,7 @@ gdt_data:
 	db 10010010b
 	db 11000000b
 	db 0
-	gdt_video_addr equ $-gdt_table_start
+gdt_video_addr equ $-gdt_table_start
 gdt_video:
 	dw 0ffh
 	dw 8000h
@@ -70,7 +67,7 @@ gdt_video:
 	db 10010010b
 	db 11000000b
 	db 0
-	gdt_code_addr equ $-gdt_table_start
+gdt_code_addr equ $-gdt_table_start
 gdt_code:
 	dw 07ffh
 	dw 1h

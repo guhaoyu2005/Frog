@@ -7,8 +7,19 @@
 
  */
 
-void tadpole_init(void);
+asm ("jmp start");
 
-void tadpole_init(void) {
-    
+void start() {
+    /*
+    volatile char *videoMem = (volatile char*)0xb8000;
+    const char *string = "Loaded!";
+    int color = 7;
+    while (*string != 0) {
+        *videoMem++ = *string++;
+        *videoMem++ = color;
+    }
+     */
+    while (1) {
+        
+    }
 }
