@@ -4,5 +4,5 @@ if [ -f "*.bin" ] ; then
     rm -f *.bin
 fi
 printf "Building...\n"
-nasm -o boot.bin bs.asm
+nasm -o boot boot.asm
 printf "Done.\n"
