@@ -15,7 +15,9 @@
 #boot folder
 /kernel/arch/x86/boot/*.bin
 /kernel/arch/x86/boot/boot
-/kernel/arch/x86/boot/testkernel.asm
-/kernel/arch/x86/boot/k
-
+/kernel/arch/x86/boot/test
+/kernel/arch/x86/boot/*.img
+/kernel/arch/x86/boot/bochsrc
+/kernel/arch/x86/boot/*.dump
+/kernel/arch/x86/boot/
 

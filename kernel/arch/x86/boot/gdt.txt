@@ -1,3 +1,74 @@
+
+    ;; will go to 32bit
+GO_P_MODE:
+    ;; we will switch to protect mode here
+    cli                         ;disable interrupts
+    in      al, 92h             ;enable a20
+	or      al, 00000010b
+	out     92h, al
+	cli
+    lgdt    [gdtr_addr]
+    mov     eax, cr0
+    or      eax, 1
+    mov     cr0, eax            ;set PE in cr0 to 1 for enabling PMode
+CLR_PREFETCH_PIPELN_Q:
+    jmp     EMPTY_PQ_TRICK
+    nop
+    nop
+EMPTY_PQ_TRICK:                 ;long jump for clearing prefetched instr
+    mov     ax, gdt_video_addr
+    mov     gs, ax
+    mov     edi, 38
+    mov     ah, 07h
+    mov     al, "."
+    mov     [gs:edi], ax
+    jmp     LOAD_SECOND_STAGE_LOADER
+SETUP_GDT:
+    ;; copy this from intel x86 ref
+gdt_table_start:
+gdt_null:
+	dd 0h
+	dd 0h
+gdt_code_addr equ $-gdt_table_start
+gdt_code:
+	dw 07ffh
+	dw 1h
+	db 80h
+	db 10011010b
+	db 11000000b
+	db 0
+gdt_data_addr equ $-gdt_table_start
+gdt_data:
+	dw 07ffh
+	dw 0h
+	db 0h
+	db 10010010b
+	db 11000000b
+	db 0
+gdt_video_addr equ $-gdt_table_start
+gdt_video:
+	dw 0ffh
+	dw 8000h
+	db 0bh
+	db 10010010b
+	db 11000000b
+	db 0
+gdt_table_end:
+
+gdtr_addr:
+	dw gdt_table_end-gdt_table_start-1
+	dd gdt_table_start
+
+
+
+
+
+
+
+
+
+
+
 gdt_kernel_code_addr equ $-gdt_table_start
 gdt_kernel_code:
 	; gdt code:	    ; code descriptor

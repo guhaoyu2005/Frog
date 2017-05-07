@@ -5,4 +5,5 @@ if [ -f "*.bin" ] ; then
 fi
 printf "Building...\n"
 nasm -o boot boot.asm
+nasm -o loader loader.asm
 printf "Done.\n"
