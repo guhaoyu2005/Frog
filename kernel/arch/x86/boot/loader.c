@@ -11,6 +11,8 @@
 #include "kdev_helper.h"
 #endif
 #include "types.h"
+#include "interrupt_x86.h"
+#include "timer_x86.h"
 
 #define k_MEM_GDT_LENGTH  5
 
@@ -74,17 +76,17 @@ void init_gdt() {
                   :);
 }
 
-
-int loader_entry()
-{
+int loader_entry() {
     init_gdt();
+    init_idt();
     
     kscreen_clear();
     kprint_good("Good  ", "Loader loaded.\n");
     kprint_good("Good  ", "GDT initialized.\n");
     kprint_panic("Fatal ", "Kernel does not exist!");
-    while (1) {
-    }
+
+    while (1){}
+
     return 0;
 }
 

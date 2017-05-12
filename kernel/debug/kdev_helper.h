@@ -10,6 +10,12 @@
 #ifndef KDEV_HELPER_H_
 #define KDEV_HELPER_H_
 
+typedef __builtin_va_list va_list;
+
+#define va_start(ap, last)         (__builtin_va_start(ap, last))
+#define va_arg(ap, type)           (__builtin_va_arg(ap, type))
+#define va_end(ap) 
+
 #include "types.h"
 
 typedef enum {
@@ -51,5 +57,14 @@ void kprint(char *msg);
 void kprint_panic(char *title, char *msg);
 void kprint_good(char *title, char *msg);
 void kscreen_clear();
+
+void printk(char *msg, ...);
+
+void memset(void*, uint32_t, uint32_t); //begin value size
+void memcpy(void*, const void*, uint32_t);  //dest src size
+char *strcpy(char*, const char*);  // dest src  (r dest)
+char *strcat(char*, const char*);  //dest src   (r dest)
+int strlen(char*);
+
 
 #endif  //KDEV_HELPER_H_

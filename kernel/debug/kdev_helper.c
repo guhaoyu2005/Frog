@@ -107,6 +107,10 @@ void console_write_color(char *cstr, char_color_t back, char_color_t fore) {
     }
 }
 
+void printk(char *msg, ...) {
+    
+}
+
 void kprint(char *msg) {
     console_write(msg);
 }
@@ -125,7 +129,51 @@ void kscreen_clear() {
     console_clear();
 }
 
+void memset(void* src, uint32_t val, uint32_t len){
+    uint32_t* temp = src;
+    while (len > 0) {
+        *temp++ = val;
+        len--;
+    }
+} //begin value size
 
+void memcpy(void* dest, const void* src, uint32_t len) {
+    uint32_t *temp = dest;
+    const uint32_t *tempSrc = src;
+    while (len > 0) {
+        *temp++ = *tempSrc++;
+        len--;
+    }
+    
+}  //dest src size
+
+char *strcpy(char* dest, const char* src) {
+    uint32_t *temp = dest;
+    uint32_t *tempSrc = src;
+    do {
+        *temp++ = *tempSrc++;
+    } while (*tempSrc != 0);
+    return dest;
+}  // dest src  (r dest)
+
+char *strcat(char* dest, const char* src) {
+    uint32_t *temp = dest;
+    while (*temp != '\0') {
+        temp++;
+    }
+    do {
+        *temp++ = *src++;
+    } while (*src != '\0');
+    return dest;
+}  //dest src   (r dest)
+
+int strlen(char* src) {
+    int i = 0;
+    while (*src++) {
+        i++;
+    }
+    return i;
+}
 
 
 
