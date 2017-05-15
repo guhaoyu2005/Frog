@@ -58,7 +58,6 @@ void kprint_panic(char *title, char *msg);
 void kprint_good(char *title, char *msg);
 void kscreen_clear();
 
-void printk(char *msg, ...);
 
 void memset(void*, uint32_t, uint32_t); //begin value size
 void memcpy(void*, const void*, uint32_t);  //dest src size

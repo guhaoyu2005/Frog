@@ -1,14 +1,15 @@
 /*
  *
- *      interrupt_x86.c
+ *      idt.c
  *
  *      Copyright (C) 2017 Haoyu Gu
  *
  *
  */
-
+#ifdef K_DEV
 #include "kdev_helper.h"
-#include "interrupt_x86.h"
+#endif
+#include "idt.h"
 
 extern void idt_flush(uint32_t);
 

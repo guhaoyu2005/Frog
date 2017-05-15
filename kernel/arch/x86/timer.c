@@ -1,13 +1,13 @@
 /*
  *
- *      timer_x86.c
+ *      timer.c
  *
  *      Copyright (C) 2017 Haoyu Gu
  *
  *
  */
-#include "timer_x86.h"
-#include "interrupt_x86.h"
+#include "timer.h"
+#include "idt.h"
 #ifdef K_DEV
 #include "kdev_helper.h"
 #endif

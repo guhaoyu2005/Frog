@@ -107,9 +107,6 @@ void console_write_color(char *cstr, char_color_t back, char_color_t fore) {
     }
 }
 
-void printk(char *msg, ...) {
-    
-}
 
 void kprint(char *msg) {
     console_write(msg);

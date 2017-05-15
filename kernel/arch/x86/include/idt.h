@@ -1,11 +1,15 @@
 /*
  *
- *      interrupt_x86.h
+ *      idt.h
  *
  *      Copyright (C) 2017 Haoyu Gu
  *
  *
  */
+#ifndef IDT_H_
+#define IDT_H_
+
+#include "types.h"
 
 #define k_IDT_LENGTH 256
 #define  IRQ0     32    // timer
@@ -124,3 +128,5 @@ void isr128();
 void reg_interrupt_handler(uint8_t, interrupt_handler_t);
 void isr_handler(pt_regs *);
 void init_idt();
+
+#endif

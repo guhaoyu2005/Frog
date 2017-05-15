@@ -11,7 +11,7 @@ CC = gcc
 LD = ld
 ASM = nasm
 
-C_FLAGS = -c -Wall -m32 -ggdb -gstabs+ -nostdinc -fno-builtin -fno-stack-protector $(MACRO) -I include -I kernel/debug -I kernel/arch/x86
+C_FLAGS = -c -Wall -m32 -ggdb -gstabs+ -nostdinc -fno-builtin -fno-stack-protector $(MACRO) -I kernel/include -I kernel/arch/x86/include -I kernel/debug 
 LD_FLAGS = -T build/scripts/kernel.ld -m elf_i386 -nostdlib
 ASM_FLAGS = -f elf -g -F stabs
 
@@ -40,6 +40,7 @@ make_image:
 	sudo cp loader /mnt/frog/frog
 	sleep 1
 	sudo umount /mnt/frog
+	mv debug/frog.img frog.img
 
 .PHONY:qemu
 qemu:
@@ -48,4 +49,3 @@ qemu:
 .PHONY:bochs
 bochs:
 	bochs -f kernel/arch/x86/boot/bochssrc
-
