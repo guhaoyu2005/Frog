@@ -16,6 +16,9 @@
 #include "timer.h"
 #include "support.h"
 
+void foo() {
+    kprint_good("Good  ", "CB\n");
+}
 
 int loader_entry() {
     init_gdt();
@@ -25,6 +28,9 @@ int loader_entry() {
     kprint_good("Good  ", "Loader loaded.\n");
     kprint_good("Good  ", "GDT initialized.\n");
     kprint_panic("Fatal ", "Kernel does not exist!");
+    
+    init_timer(100, &foo);
+    asm volatile ("sti");
 
     while (1){}
 

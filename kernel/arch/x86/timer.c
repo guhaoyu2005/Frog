@@ -11,13 +11,17 @@
 #ifdef K_DEV
 #include "kdev_helper.h"
 #endif
-/*
+
+void (*callback_func)();
+
 void timer_callback(pt_regs *regs) {
     //callback
-    kprint("TICK");
+    kprint_good("Good  ", "CB\n");
+    //callback_func();
 }
 
-void init_timer(uint32_t frequency, void (*callbk)) {
+void init_timer(uint32_t frequency, void (*callbk)()) {
+    callback_func = callbk;
     reg_interrupt_handler(IRQ0, timer_callback);
 
     uint32_t divisor = 1193180 / frequency;
@@ -30,4 +34,3 @@ void init_timer(uint32_t frequency, void (*callbk)) {
     outwb(0x40, low);
     outwb(0x40, hign);
 }
-*/

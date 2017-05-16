@@ -40,7 +40,7 @@ make_image:
 	sudo cp loader /mnt/frog/frog
 	sleep 1
 	sudo umount /mnt/frog
-	mv debug/frog.img frog.img
+	cp debug/frog.img frog.img
 
 .PHONY:qemu
 qemu:
