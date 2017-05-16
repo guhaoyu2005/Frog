@@ -49,6 +49,8 @@ uint16_t inrw(uint16_t port);
 void console_clear();
 void console_putc_color(char c, char_color_t back, char_color_t fore);
 void console_write(char *cstr);
+void console_putc(char c);
+void console_write_rev(char *cstr);
 void console_write_color(char *cstr, char_color_t back, char_color_t fore);
 void console_write_hex(uint32_t n, char_color_t back, char_color_t fore);
 void console_write_dec(uint32_t n, char_color_t back, char_color_t fore);

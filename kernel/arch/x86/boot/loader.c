@@ -44,7 +44,8 @@ int loader_entry() {
     init_timer(200, &foo);
     asm volatile ("sti");
     
-    
+    printk("int = %d\nu_int = %u\noct = %o\nhex = %x\nHEX = %X\nchar = %c\nstr = %s\n%%\n", -65534, 65534, 65527, 65527, 65527, 'c', "STRING");
+
 
     while (1){}
 

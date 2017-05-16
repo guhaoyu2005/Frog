@@ -95,9 +95,20 @@ void console_putc_color(char c, char_color_t back, char_color_t fore) {
     
 }
 
+void console_putc(char c) {
+    console_putc_color(c, cc_black, cc_light_grey);
+}
+
 void console_write(char *cstr) {
     while (*cstr) {
         console_putc_color(*cstr++, cc_black, cc_light_grey);
+    }
+}
+
+void console_write_rev(char *cstr) {
+    int len = strlen(cstr) - 1;
+    while (len >= 0) {
+        console_putc_color(*(cstr+len--), cc_black, cc_light_grey);
     }
 }
 
@@ -145,22 +156,25 @@ void memcpy(void* dest, const void* src, uint32_t len) {
 }  //dest src size
 
 char *strcpy(char* dest, const char* src) {
-    uint32_t *temp = dest;
-    uint32_t *tempSrc = src;
-    do {
+    char *temp = dest;
+    char *tempSrc = src;
+    while (*tempSrc) {
         *temp++ = *tempSrc++;
-    } while (*tempSrc != 0);
+    }
+    *temp = '\0';
     return dest;
 }  // dest src  (r dest)
 
 char *strcat(char* dest, const char* src) {
-    uint32_t *temp = dest;
-    while (*temp != '\0') {
+    char *temp = dest;
+    char *tempSrc = src;
+    while (*temp) {
         temp++;
     }
-    do {
-        *temp++ = *src++;
-    } while (*src != '\0');
+    while (*tempSrc) {
+        *temp++ = *tempSrc++;
+    }
+    *temp = '\0';
     return dest;
 }  //dest src   (r dest)
 
