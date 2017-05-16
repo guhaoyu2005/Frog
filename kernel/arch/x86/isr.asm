@@ -1,9 +1,9 @@
-global idt_flush
+	global idt_flush
 	idt_flush:
 		mov eax, [esp+4]
 		lidt [eax]
 		ret
-	.end
+	.end:
 
 	%macro ISR_NOERRCODE 1
 	[GLOBAL isr%1]
@@ -58,35 +58,36 @@ global idt_flush
 
 	ISR_NOERRCODE 128
 
-extern isr_handler
+    global isr_common_stub
+	extern isr_handler
 
-isr_common_stub:
-    pusha
-    mov ax, ds
-    push eax
+	isr_common_stub:
+	    pusha
+	    mov ax, ds
+	    push eax
 
-    mov ax, 0x10
-    mov ds, ax
-    mov es, ax
-    mov fs, ax
-    mov gs, ax
-    mov ss, ax
+	    mov ax, 0x10
+	    mov ds, ax
+	    mov es, ax
+	    mov fs, ax
+	    mov gs, ax
+	    mov ss, ax
 
-    push esp
-    call isr_handler
-    add esp, 4
+	    push esp
+	    call isr_handler
+	    add esp, 4
 
-    pop ebx
-    mov ds, bx
-    mov es, bx
-    mov fs, bx
-    mov gs, bx
-    mov ss, bx
+	    pop ebx
+	    mov ds, bx
+	    mov es, bx
+	    mov fs, bx
+	    mov gs, bx
+	    mov ss, bx
 
-    popa
-    add esp, 8
-    iret
-.end:
+	    popa
+	    add esp, 8
+	    iret
+	.end:
 
 	%macro IRQ 2
 	[GLOBAL irq%1]
@@ -114,33 +115,34 @@ isr_common_stub:
 	IRQ  14,    46
 	IRQ  15,    47
 
-extern irq_handler
+    global irq_common_stub
+	extern irq_handler
 
-irq_common_stub:
-    pusha
-    
-    mov ax, ds
-    push eax
-    
-    mov ax, 0x10
-    mov ds, ax
-    mov es, ax
-    mov fs, ax
-    mov gs, ax
-    mov ss, ax
-    
-    push esp
-    call irq_handler
-    add esp, 4
-    
-    pop ebx
-    mov ds, bx
-    mov es, bx
-    mov fs, bx
-    mov gs, bx
-    mov ss, bx
-    
-    popa
-    add esp, 8
-    iret
-.end:
+	irq_common_stub:
+	    pusha
+	    
+	    mov ax, ds
+	    push eax
+	    
+	    mov ax, 0x10
+	    mov ds, ax
+	    mov es, ax
+	    mov fs, ax
+	    mov gs, ax
+	    mov ss, ax
+	    
+	    push esp
+	    call irq_handler
+	    add esp, 4
+	    
+	    pop ebx
+	    mov ds, bx
+	    mov es, bx
+	    mov fs, bx
+	    mov gs, bx
+	    mov ss, bx
+	    
+	    popa
+	    add esp, 8
+	    iret
+	.end:

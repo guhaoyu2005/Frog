@@ -18,6 +18,7 @@ typedef struct gdt_ptr_t {
     uint32_t base;
 } __attribute__((packed)) gdt_ptr_t;
 
+void gdt_flush(uint32_t);
 
 gdt_entry_t gdt_entries[k_MEM_GDT_LENGTH];
 gdt_ptr_t gdt_ptr;

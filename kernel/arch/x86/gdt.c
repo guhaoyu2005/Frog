@@ -1,5 +1,6 @@
 #include "gdt.h"
 
+
 static void gdt_set_gate(int32_t num, uint32_t base, uint32_t limit, uint8_t access, uint8_t gran)
 {
     gdt_entries[num].base_low     = (base & 0xFFFF);
@@ -19,12 +20,15 @@ void init_gdt() {
     
     //flat-mode
     gdt_set_gate(0, 0, 0, 0, 0);
-    gdt_set_gate(1, 0, 0xFFFFFFFF, 0x9A, 0xCF);
-    gdt_set_gate(2, 0, 0xFFFFFFFF, 0x92, 0xCF);
+    gdt_set_gate(1, 0, 0xFFFFF, 0x9A, 0xCF);
+    gdt_set_gate(2, 0, 0xFFFFF, 0x92, 0xCF);
     gdt_set_gate(3, 0, 0xFFFFFFFF, 0xFA, 0xCF);
     gdt_set_gate(4, 0, 0xFFFFFFFF, 0xF2, 0xCF);
+    
+    gdt_flush((uint32_t)&gdt_ptr);
+    /*
     asm volatile (".intel_syntax noprefix\n"
-                  "add esp, 4\n"
+                  "mov esp, 4\n"
                   "mov eax, %0\n"
                   "lgdt [eax]\n"
                   "mov ax, 0x10\n"
@@ -40,4 +44,6 @@ void init_gdt() {
                   :
                   :"r" ((uint32_t)&gdt_ptr)
                   :);
+    */
+    
 }

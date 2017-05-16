@@ -87,9 +87,9 @@ void console_putc_color(char c, char_color_t back, char_color_t fore) {
     if (cursor_x >= 80) {
         cursor_x = 0;
         cursor_y++;
-        if (cursor_y >= 25)
-            scroll();
     }
+    if (cursor_y >= 25)
+        scroll();
     
     move_cursor();
     
