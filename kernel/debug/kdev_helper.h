@@ -66,6 +66,7 @@ void memcpy(void*, const void*, uint32_t);  //dest src size
 char *strcpy(char*, const char*);  // dest src  (r dest)
 char *strcat(char*, const char*);  //dest src   (r dest)
 int strlen(char*);
+int strcmp(const char *, const char *);
 
 
 #endif  //KDEV_HELPER_H_

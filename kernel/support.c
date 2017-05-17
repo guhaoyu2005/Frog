@@ -94,7 +94,10 @@ int vprintk(const char *msg, va_list args) {
 }
 
 void panic(const char *msg, ...) {
-    
+    printk("*****Kernel Panic\n");
+    printk("0x0\n\n");
+    printk("Call trace:\n\n");
+    printk("*****\n");
 }
 
 
